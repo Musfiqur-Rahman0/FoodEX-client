@@ -1,8 +1,10 @@
 import React from "react";
 import burger from "../../assets/download.jpeg";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router";
 
 const FoodCard = ({ food }) => {
+  const navigate = useNavigate();
   return (
     <div className="grid gap-4 border rounded-xl p-4 shadow-sm bg-white">
       <figure className="w-full h-48 overflow-hidden rounded-lg">
@@ -23,7 +25,12 @@ const FoodCard = ({ food }) => {
         <p className="text-sm text-gray-600">
           Expiry Date: <span className="font-medium">2025-06-30</span>
         </p>
-        <Button className={"w-full rounded-full"}>See Details</Button>
+        <Button
+          onClick={() => navigate("/food/food-details")}
+          className={"w-full rounded-full"}
+        >
+          See Details
+        </Button>
       </div>
     </div>
   );

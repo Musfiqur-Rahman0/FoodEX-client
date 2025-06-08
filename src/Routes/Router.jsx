@@ -5,6 +5,7 @@ import Login from "@/Pages/authenticationPages/Login";
 import Signup from "@/Pages/authenticationPages/Signup";
 import Contact from "@/Pages/Contact/Contact";
 import ErrorPage from "@/Pages/Error/ErrorPage";
+import Details from "@/Pages/FoodDetails/Details";
 import Fridge from "@/Pages/fridge/Fridge";
 import Home from "@/Pages/Home/Home";
 import MyItems from "@/Pages/myAddedFoodItems/MyItems";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/my-items",
         Component: MyItems,
+      },
+      {
+        path: "/food/:id",
+        Component: Details,
       },
     ],
   },
