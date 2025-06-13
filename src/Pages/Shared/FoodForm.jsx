@@ -1,35 +1,54 @@
+import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/DatePicker";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { AuthContext } from "@/Context/AuthContext";
-import React, { use, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
 
-const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
+import React, { use, useState } from "react";
+
+import { Controller, useForm } from "react-hook-form";
+import { IoMdClose } from "react-icons/io";
+
+const FoodForm = ({
+  handlerFunc,
+  btnText,
+  primaryText,
+  foodData,
+  closeBtn,
+  handleClose,
+}) => {
   const [date, setDate] = useState();
   const { user } = use(AuthContext);
+
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
-      name: user?.name,
-      email: user?.email,
-      foodName: "",
-      expairyDate: "",
-      description: "",
-      quantity: 0,
-      price: 0,
-      category: "",
+      userName: user?.displayName,
+      userEmail: user?.email,
+      foodName: foodData?.foodName || "",
+      expairyDate: foodData?.expairyDate || null,
+      description: foodData?.description || "",
+      moreDetails: foodData?.moreDetails || "",
+      quantity: foodData?.quantity || 0,
+      price: foodData?.price || 0,
+      category: foodData?.category || "",
+      foodImage: foodData?.foodImage || "",
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="py-5 px-3 md:px-20 md:py-12 rounded-lg shadow-md h-full w-full my-10 space-y-10 border border-gray-100"
+      onSubmit={handleSubmit(handlerFunc)}
+      className="relative py-5 px-3 md:px-20 md:py-12 rounded-lg shadow-md  w-full my-10 space-y-10 border border-gray-100 bg-white"
     >
+      {closeBtn && (
+        <Button
+          onClick={handleClose}
+          type="button"
+          className="absolute !right-4 !top-4"
+        >
+          <IoMdClose />
+        </Button>
+      )}
       <div className="text-center">
         <h2 className="text-4xl font-bold">{primaryText}</h2>
       </div>
@@ -46,7 +65,20 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
           <Controller
             name="foodName"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            rules={{ required: "Food name is required" }}
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <Input
+                  {...field}
+                  className={
+                    error ? `border border-red-500` : "border border-gray-400"
+                  }
+                />
+                {error && (
+                  <p className="text-red-500 font-semibold">{error.message}</p>
+                )}
+              </>
+            )}
           />
         </div>
         {/* category field  with budget*/}
@@ -58,7 +90,22 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
             <Controller
               name="category"
               control={control}
-              render={({ field }) => <Input {...field} />}
+              rules={{ required: "category should not be empty" }}
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <Input
+                    {...field}
+                    className={
+                      error ? `border border-red-500` : "border border-gray-400"
+                    }
+                  />
+                  {error && (
+                    <p className="text-red-500 font-semibold">
+                      {error.message}
+                    </p>
+                  )}
+                </>
+              )}
             />
           </div>
           <div className="space-y-1 flex flex-col">
@@ -68,22 +115,29 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
             <Controller
               name="price"
               control={control}
-              render={({ field }) => <Input {...field} />}
+              rules={{ required: "Price can't be negetive or empty" }}
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <Input
+                    type="number"
+                    {...field}
+                    className={
+                      error ? `border border-red-500` : "border border-gray-400"
+                    }
+                  />
+                  {error && (
+                    <p className="text-red-500 font-semibold">
+                      {error.message}
+                    </p>
+                  )}
+                </>
+              )}
             />
           </div>
         </div>
-        {/* tags filed with deadline */}
+
+        {/* tags filed with expairy date */}
         <div className="grid grid-cols-2 gap-5 items-center">
-          <div className="space-y-1 flex flex-col ">
-            <label htmlFor="tags" className="font-bold">
-              Tags
-            </label>
-            <Controller
-              name="tags"
-              control={control}
-              render={({ field }) => <Input {...field} />}
-            />
-          </div>
           <div className="space-y-1 flex flex-col">
             <label htmlFor="deadline" className="font-bold">
               Expairy Date
@@ -91,18 +145,70 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
             <Controller
               name="expairyDate"
               control={control}
-              render={({ field }) => <DatePicker {...field} />}
+              rules={{ required: "expairy date is required" }}
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <DatePicker value={field.value} onChange={field.onChange} />
+                  {error && (
+                    <p className="text-red-500 font-semibold text-sm">
+                      {error.message}
+                    </p>
+                  )}
+                </>
+              )}
+            />
+          </div>
+
+          <div className="space-y-1 flex flex-col">
+            <label htmlFor="skills" className="font-bold">
+              Quantity
+            </label>
+            <Controller
+              name="quantity"
+              control={control}
+              rules={{ required: "Quantity can't be negative or empty" }}
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <Input
+                    type={"number"}
+                    {...field}
+                    className={
+                      error ? `border border-red-500` : "border border-gray-400"
+                    }
+                  />
+                  {error && (
+                    <p className="text-red-500 font-semibold">
+                      {error.message}
+                    </p>
+                  )}
+                </>
+              )}
             />
           </div>
         </div>
+
         <div className="space-y-1 flex flex-col">
-          <label htmlFor="skills" className="font-bold">
-            Quantity
+          <label htmlFor="foodImage" className="font-bold">
+            Food Image
           </label>
           <Controller
-            name="quantity"
+            name="foodImage"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            rules={{ required: "Food image is required" }}
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <Input
+                  type="url"
+                  {...field}
+                  className={
+                    error ? `border border-red-500` : "border border-gray-400"
+                  }
+                />
+                {error && (
+                  <p className="text-red-500 font-semibold">{error.message}</p>
+                )}
+              </>
+            )}
           />
         </div>
 
@@ -113,7 +219,44 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
           <Controller
             name="description"
             control={control}
-            render={({ field }) => <Textarea {...field} />}
+            rules={{ required: "Please provide some description" }}
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <Textarea
+                  {...field}
+                  className={
+                    error ? `border border-red-500` : "border border-gray-400"
+                  }
+                />
+                {error && (
+                  <p className="text-red-500 font-semibold">{error.message}</p>
+                )}
+              </>
+            )}
+          />
+        </div>
+        <div className="space-y-1 flex flex-col">
+          <label htmlFor="moreDetails" className="font-bold">
+            More Details
+          </label>
+          <Controller
+            name="moreDetails"
+            control={control}
+            rules={{ required: "Please provide more details " }}
+            render={({ field, fieldState: { error } }) => (
+              <>
+                <Textarea
+                  {...field}
+                  placeholder="Provide some more info eg: ingredient, Calories, Preparation time etc and separate with dot ( . )"
+                  className={
+                    error ? `border border-red-500` : "border border-gray-400"
+                  }
+                />
+                {error && (
+                  <p className="text-red-500 font-semibold">{error.message}</p>
+                )}
+              </>
+            )}
           />
         </div>
 
@@ -123,9 +266,10 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
             Your Email
           </label>
           <Controller
-            name="email"
+            name="userEmail"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            rules={{ required: true }}
+            render={({ field }) => <Input {...field} disabled />}
           />
         </div>
 
@@ -135,9 +279,10 @@ const FoodForm = ({ handlerFunc, btnText, primaryText, taskdata }) => {
             Your Name
           </label>
           <Controller
-            name="name"
+            name="userName"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            rules={{ required: true }}
+            render={({ field }) => <Input {...field} disabled />}
           />
         </div>
       </div>

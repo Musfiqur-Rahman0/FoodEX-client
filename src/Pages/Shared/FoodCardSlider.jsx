@@ -2,8 +2,11 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FoodCard from "./FoodCard";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { useLoaderData } from "react-router";
 
 const FoodCardSlider = ({ items }) => {
+  // console.log(items);
+
   return (
     <Swiper
       //   navigation={true}
@@ -14,9 +17,9 @@ const FoodCardSlider = ({ items }) => {
       loop
       className="mt-5 "
     >
-      {items.map((_, index) => (
+      {items?.map((food, index) => (
         <SwiperSlide key={index}>
-          <FoodCard />
+          <FoodCard food={food} />
         </SwiperSlide>
       ))}
     </Swiper>

@@ -11,15 +11,19 @@ import Home from "@/Pages/Home/Home";
 import MyItems from "@/Pages/myAddedFoodItems/MyItems";
 
 import { createBrowserRouter } from "react-router";
+import Privet from "./Privet";
+import Spinner from "@/components/ui/Spinner";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
     errorElement: <ErrorPage />,
+    hydrateFallbackElement: <Spinner />,
     children: [
       {
         index: true,
+        loader: () => fetch("http://localhost:3000/foods/recent-expaired"),
         Component: Home,
       },
       {
@@ -40,18 +44,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/fridge",
+        loader: () => fetch("http://localhost:3000/foods"),
         Component: Fridge,
       },
       {
         path: "/add-food",
-        Component: AddFood,
+        element: (
+          <Privet>
+            <AddFood />
+          </Privet>
+        ),
       },
       {
         path: "/my-items",
-        Component: MyItems,
+        element: (
+          <Privet>
+            <MyItems />
+          </Privet>
+        ),
       },
       {
         path: "/food/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/food/${params.id}`),
         Component: Details,
       },
     ],

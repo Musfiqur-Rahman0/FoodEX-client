@@ -40,9 +40,22 @@ export const foodItems = [
 
 export const navigation = [
   { name: "Home", pathName: "/" },
+  { name: "Fridge", pathName: "/fridge" },
+  { name: "Login", pathName: "/login" },
+  { name: "register", pathName: "/signup" },
   { name: "Add food", pathName: "/add-food" },
   { name: "my items", pathName: "/my-items" },
-  { name: "Fridge", pathName: "/fridge" },
-  { name: "register", pathName: "/signup" },
-  { name: "Login", pathName: "/login" },
 ];
+
+export const getReadAbleDate = (isoDate) => {
+  const converted = new Date(isoDate);
+
+  const options = {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  };
+  const formattedDate = converted.toLocaleDateString("en-GB", options);
+  return formattedDate;
+};

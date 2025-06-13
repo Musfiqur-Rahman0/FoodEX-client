@@ -1,7 +1,5 @@
-"use client";
-
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Volleyball } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -13,8 +11,7 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 
-export function DatePicker() {
-  const [date, setDate] = useState();
+export function DatePicker({ value, onChange }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -22,18 +19,18 @@ export function DatePicker() {
           variant={"outline"}
           className={cn(
             "w-full h-full  justify-start text-left font-normal ",
-            !date && "text-muted-foreground"
+            !value && "text-muted-foreground"
           )}
         >
           <CalendarIcon />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {value ? format(value, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0" align="start">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={value}
+          onSelect={onChange}
           initialFocus
         />
       </PopoverContent>
