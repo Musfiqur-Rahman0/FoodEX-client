@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Controller, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import Swal from "sweetalert2";
+import CountDown from "../Shared/CountDown";
 
 const Details = () => {
   const food = useLoaderData();
@@ -43,41 +44,41 @@ const Details = () => {
   const expairedTime = getReadAbleDate(expairyDate);
   const addedTime = getReadAbleDate(addedOn);
 
-  const handleAddNote = (e) => {
-    e.preventDefault();
-    const note = e.target.name.value;
-    console.log("submited");
-    console.log(note);
-  };
+  // const handleAddNote = (e) => {
+  //   e.preventDefault();
+  //   const note = e.target.name.value;
+  //   console.log("submited");
+  //   console.log(note);
 
-  const { control, handleSubmit, watch } = useForm({
-    // defaultValues: {
-    //   adminNote: foodData?.adminNote || "",
-    // },
-  });
+  // };
+
+  const { control, handleSubmit, watch, reset } = useForm({});
 
   const { id } = useParams();
   const onSubmit = (data) => {
-    console.log(data);
+    const adminNote = {
+      ...data,
+      notePostedOn: currentTime,
+    };
+    // console.log(adminNote);
     fetch(`http://localhost:3000/update-food/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(adminNote),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if (data.updateCount) {
+        if (data) {
           Swal.fire({
             title: "Note added successfully",
             icon: "success",
           }).then((result) => {
-            if (result?.isConfirmed) {
-              const withNote = data?.data;
-              console.log(withNote);
-              // setFoodData((prev)=> {...prev,});
+            if (result.isConfirmed) {
+              fetch(`http://localhost:3000/food/${id}`)
+                .then((res) => res.json())
+                .then((data) => setFoodData(data));
             }
           });
         }
@@ -183,6 +184,10 @@ const Details = () => {
                 <li key={i}>{info}</li>
               ))}
             </ul>
+          </div>
+
+          <div className="mb-6 flex items-center gap-2 text-xl font-bold">
+            <CountDown isoDate={expairyDate} />
           </div>
 
           <div className="mb-6 ">

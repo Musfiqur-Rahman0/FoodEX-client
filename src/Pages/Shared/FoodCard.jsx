@@ -10,15 +10,22 @@ const FoodCard = ({ food }) => {
   const { quantity, foodName, category, foodImage, expairyDate, _id } = food;
 
   const formattedDate = getReadAbleDate(expairyDate);
+  const now = new Date();
+  const isExpaired = new Date(expairyDate) <= now;
 
   return (
     <div className="grid gap-4 border rounded-xl p-4 shadow-sm bg-white">
-      <figure className="w-full h-48 overflow-hidden rounded-lg">
+      <figure className="w-full h-48 overflow-hidden rounded-lg relative">
         <img
           src={foodImage || burger}
           alt="burger image"
           className="cursor-pointer w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
+        {isExpaired && (
+          <div className="absolute px-5 py-1 text-sm rounded-full right-2 top-2 bg-red-500 text-white z-10">
+            Expaired
+          </div>
+        )}
       </figure>
       <div className="space-y-2">
         <h2 className="text-xl font-semibold text-gray-800">{foodName}</h2>
