@@ -1,11 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FoodCard from "../Shared/FoodCard";
 import { useLoaderData, useNavigation } from "react-router";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { CategoryDropdown } from "../Shared/CategoryDropdown";
+import { Controller, useForm } from "react-hook-form";
+import Spinner from "@/components/ui/Spinner";
 
 const Fridge = () => {
   const foods = useLoaderData();
+  const [isFoodLoding, setIsFoodLoading] = useState(false);
+  const [allFoods, setAllFoods] = useState(foods);
+  const [category, setCategory] = useState([]);
+  const [isCategoryLoading, setIsCategoryLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const fetchCategory = async () => {
+    try {
+      setIsCategoryLoading(true);
+      const res = await fetch("http://localhost:3000/categories");
+      const data = await res.json();
 
+      setCategory(data);
+      setIsCategoryLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSelectedCategory = async (value) => {
+    try {
+      const res = await fetch(`http://localhost:3000/filter/${value}`);
+      const data = await res.json();
+      setAllFoods(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSearch = async (data) => {
+    // e.preventDefault();
+    const { query } = data;
+    try {
+      setIsFoodLoading(true);
+      const res = await fetch(`http://localhost:3000/search?query=${query}`);
+      const searchedFood = await res.json();
+      setAllFoods(searchedFood);
+      setIsFoodLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const { control, handleSubmit } = useForm();
+
+  // console.log(selectedCategory);
+
+  useEffect(() => {
+    fetchCategory();
+  }, []);
   // console.log(foods);
+  // console.log(searchQuery);
   return (
     <div className="py-8 px-5 space-y-10 max-w-7xl mx-auto">
       <div>
@@ -15,11 +69,51 @@ const Fridge = () => {
         <p className="text-sm text-slate-500 mt-1">
           A smarter way to manage your food inventory and avoid spoilage.
         </p>
+
+        <div className="mt-3 grid grid-cols-2 items-center justify-between">
+          <form
+            onSubmit={handleSubmit(handleSearch)}
+            className="flex items-center gap-2 "
+          >
+            <Controller
+              name="query"
+              control={control}
+              // rules={"Search queary required"}
+              rules={{ required: "Search query should not be empty" }}
+              render={({ field, fieldState: { error } }) => (
+                <>
+                  <Input
+                    {...field}
+                    placeholder="Search food"
+                    className={
+                      error ? `border border-red-500` : "border border-gray-400"
+                    }
+                  />
+                </>
+              )}
+            />
+            <Button type="submit" className="">
+              Search
+            </Button>
+          </form>
+          <form className="flex items-center justify-end">
+            {!isCategoryLoading ? (
+              <CategoryDropdown
+                categories={category}
+                handleSelectedCategory={handleSelectedCategory}
+              />
+            ) : (
+              <p>loading...</p>
+            )}
+          </form>
+        </div>
       </div>
       <div className="grid grid-cols-3 gap-5">
-        {foods.map((food) => (
-          <FoodCard food={food} key={food._id} />
-        ))}
+        {isFoodLoding ? (
+          <Spinner />
+        ) : (
+          allFoods?.map((food) => <FoodCard food={food} key={food._id} />)
+        )}
       </div>
     </div>
   );

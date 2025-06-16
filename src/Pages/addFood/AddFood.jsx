@@ -2,13 +2,16 @@ import React from "react";
 import FoodForm from "../Shared/FoodForm";
 import { getReadAbleDate } from "@/lib/utils";
 import Swal from "sweetalert2";
-import { useNavigate, useNavigation } from "react-router";
+import { data, useNavigate, useNavigation } from "react-router";
+import useFoodsApi from "@/Hooks/useFoodsApi";
 
 const AddFood = () => {
   const navigate = useNavigate();
   const currentTime = new Date();
+  const { addFoodPromises } = useFoodsApi();
   // const formatedCurrentTime = getReadAbleDate(currentTime);
-  const handleAddFood = (data) => {
+
+  const handleAddFood = async (data) => {
     console.log(data);
     const newFood = {
       ...data,
@@ -16,33 +19,31 @@ const AddFood = () => {
     };
 
     console.log(newFood);
-    fetch("http://localhost:3000/add-food", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newFood),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Food added successfully",
-            icon: "success",
-          }).then((result) => {
-            if (result?.isConfirmed) {
-              console.log(result);
-              navigate("/my-items");
-              console.log(result.isConfirmed); // ✅ This logs true
-            }
-          });
-        } else {
-          Swal.fire({
-            title: "Try again",
-            icon: "error",
-          });
-        }
+    try {
+      const result = await addFoodPromises(newFood);
+      if (result.insertedId) {
+        Swal.fire({
+          title: "Food added successfully",
+          icon: "success",
+        }).then((res) => {
+          if (res.isConfirmed) {
+            navigate("/my-items");
+          }
+        });
+      } else {
+        Swal.fire({
+          title: "Try again",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Error adding food:", error);
+      Swal.fire({
+        title: "Server Error",
+        text: "Please try again later.",
+        icon: "error",
       });
+    }
   };
 
   return (

@@ -8,6 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import Swal from "sweetalert2";
 import CountDown from "../Shared/CountDown";
+import useFoodsApi from "@/Hooks/useFoodsApi";
 
 const Details = () => {
   const food = useLoaderData();
@@ -44,6 +45,7 @@ const Details = () => {
   const expairedTime = getReadAbleDate(expairyDate);
   const addedTime = getReadAbleDate(addedOn);
 
+  const { updateFoodPromisesWithPatch } = useFoodsApi();
   // const handleAddNote = (e) => {
   //   e.preventDefault();
   //   const note = e.target.name.value;
@@ -55,34 +57,51 @@ const Details = () => {
   const { control, handleSubmit, watch, reset } = useForm({});
 
   const { id } = useParams();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const adminNote = {
       ...data,
       notePostedOn: currentTime,
     };
-    // console.log(adminNote);
-    fetch(`http://localhost:3000/update-food/${id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(adminNote),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          Swal.fire({
-            title: "Note added successfully",
-            icon: "success",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              fetch(`http://localhost:3000/food/${id}`)
-                .then((res) => res.json())
-                .then((data) => setFoodData(data));
-            }
-          });
-        }
-      });
+
+    try {
+      const result = await updateFoodPromisesWithPatch(id, adminNote);
+      if (result) {
+        Swal.fire({
+          title: "Note added successfully",
+          icon: "success",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`http://localhost:3000/food/${id}`)
+              .then((res) => res.json())
+              .then((data) => setFoodData(data));
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    //   method: "PATCH",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(adminNote),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data) {
+    //       Swal.fire({
+    //         title: "Note added successfully",
+    //         icon: "success",
+    //       }).then((result) => {
+    //         if (result.isConfirmed) {
+    //           fetch(`http://localhost:3000/food/${id}`)
+    //             .then((res) => res.json())
+    //             .then((data) => setFoodData(data));
+    //         }
+    //       });
+    //     }
+    //   });
   };
 
   return (
@@ -93,7 +112,7 @@ const Details = () => {
         <div className="relative">
           <img
             id="foodImage"
-            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            src={foodImage}
             alt="Food Image"
             className="w-full h-[350px] object-cover"
           />

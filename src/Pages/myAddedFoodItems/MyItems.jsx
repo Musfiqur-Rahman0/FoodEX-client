@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { Suspense, use, useEffect, useState } from "react";
 import image from "../../assets/download.jpeg";
 import { Edit, EyeIcon } from "lucide-react";
 import { FaTrash } from "react-icons/fa";
@@ -9,6 +9,8 @@ import Spinner from "@/components/ui/Spinner";
 import Lottie from "lottie-react";
 import emptyState from "../../assets/emptyState.json";
 import FoodForm from "../Shared/FoodForm";
+import useFoodsApi from "@/Hooks/useFoodsApi";
+import MyFoodList from "./MyFoodList";
 
 const MyItems = () => {
   const navigate = useNavigate();
@@ -17,73 +19,31 @@ const MyItems = () => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedFood, setSelectedFood] = useState(null);
   const { user } = use(AuthContext);
+  console.log(user);
 
-  const fetchMyTask = async () => {
-    try {
-      setIsFoodLoading(true);
-      const res = await fetch(`http://localhost:3000/myfoods/${user?.email}`);
-      const data = await res.json();
-      setMyAddedFood(data);
-      setIsFoodLoading(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { myFoodPromises } = useFoodsApi();
 
-  useEffect(() => {
-    fetchMyTask();
-  }, []);
+  // const fetchMyTask = async (token) => {
+  //   try {
+  //     setIsFoodLoading(true);
+  //     const res = await fetch(`http://localhost:3000/myfoods/${user?.email}`, {
+  //       headers: {
+  //         authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const data = await res.json();
+  //     setMyAddedFood(data);
+  //     setIsFoodLoading(false);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this",
-      icon: "warning",
-      showCancelButton: true,
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes delete it.",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:3000/delete-food/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data?.deletedCount) {
-              const remainings = myAddedFood.filter((food) => food._id !== id);
-              setMyAddedFood(remainings);
-              Swal.fire({
-                title: "Deleted!",
-                icon: "success",
-              });
-            }
-          });
-      }
-    });
-  };
+  // console.log(myFoodPromises());
 
-  const handleFoodUpdate = (updatedFood) => {
-    fetch(`http://localhost:3000/update-food/${selectedFood._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedFood),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          setSelectedFood(updatedFood);
-          fetchMyTask();
-        }
-      });
-    setIsUpdating(!isUpdating);
-  };
-
-  const handleCloseModal = () => {
-    setIsUpdating(false);
-    console.log("closed button clicked");
-  };
+  // useEffect(() => {
+  //   fetchMyTask(user?.accessToken);
+  // }, []);
 
   return (
     <div className="max-w-7xl mx-auto py-8 space-y-10 relative">
@@ -96,84 +56,9 @@ const MyItems = () => {
         </p>
       </div>
 
-      <table className="w-full">
-        <thead className="block">
-          <tr className="w-full grid grid-cols-[200px_1fr_200px_200px_1fr] pb-2 border-b border-gray-300">
-            <td>Food Image</td>
-            <td>Food Title</td>
-            <td>Category</td>
-            <td>Quantity</td>
-            <td className="text-center">Action</td>
-          </tr>
-        </thead>
-        <tbody className="w-full">
-          <div className="space-y-5">
-            {isFoodLoading ? (
-              <Spinner />
-            ) : myAddedFood.length !== 0 ? (
-              myAddedFood.map((food, index) => (
-                <tr
-                  key={index}
-                  className="w-full grid grid-cols-[200px_1fr_200px_200px_1fr] items-center py-3"
-                >
-                  <td>
-                    <img
-                      src={food?.foodImage || image}
-                      alt=""
-                      className="h-[80px] w-[120px] rounded-lg"
-                    />
-                  </td>
-                  <td>{food?.foodName}</td>
-                  <td>{food?.category}</td>
-                  <td>{food?.quantity}</td>
-                  <td className="flex items-center justify-center gap-5">
-                    <span
-                      onClick={() => navigate(`/food/${food?._id}`)}
-                      title="See details"
-                      className="cursor-pointer"
-                    >
-                      <EyeIcon />
-                    </span>
-                    <span
-                      onClick={() => {
-                        setSelectedFood(food), setIsUpdating(true);
-                      }}
-                      title="Update details"
-                      className="cursor-pointer"
-                    >
-                      <Edit />
-                    </span>
-                    <span
-                      onClick={() => handleDelete(food?._id)}
-                      title="Delete"
-                      className="cursor-pointer"
-                    >
-                      <FaTrash />
-                    </span>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <Lottie
-                animationData={emptyState}
-                className="h-[300px] md:h-[500px] md:block"
-              />
-            )}
-          </div>
-        </tbody>
-      </table>
-
-      {isUpdating && selectedFood && (
-        <div className="absolute inset-0 backdrop:blur-3xl flex justify-center items-center top-40 mt-60   bg-opacity-50 z-50">
-          <FoodForm
-            handlerFunc={handleFoodUpdate}
-            foodData={selectedFood}
-            handleClose={handleCloseModal}
-            btnText={"Update Food"}
-            closeBtn={true}
-          />
-        </div>
-      )}
+      <Suspense fallback="Loading your added food">
+        <MyFoodList myFoodPromise={myFoodPromises(user.email)} />
+      </Suspense>
     </div>
   );
 };

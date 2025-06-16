@@ -5,6 +5,7 @@ import ExpairedFood from "./expairedFood/ExpairedFood";
 import AboutFoodEX from "./aboutFoodEX/AboutFoodEX";
 import OurAim from "./ourAim/OurAim";
 import { useLoaderData } from "react-router";
+import FoodOverview from "./foodOverview/FoodOverview";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <AboutFoodEX />
       <ExpairedFood />
       <OurAim />
+      <FoodOverview />
     </section>
   );
 };
