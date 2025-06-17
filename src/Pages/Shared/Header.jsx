@@ -104,7 +104,7 @@ const Header = () => {
                   <img
                     src={user?.photoURL}
                     alt={user?.photoURL}
-                    title={user?.photoURL}
+                    title={user?.displayName}
                   />
                 </div>
               )}
