@@ -70,7 +70,7 @@ const Fridge = () => {
           A smarter way to manage your food inventory and avoid spoilage.
         </p>
 
-        <div className="mt-3 grid grid-cols-2 items-center justify-between">
+        <div className="mt-3 flex flex-col md:grid md:grid-cols-2 gap-3 md:items-center md:justify-between">
           <form
             onSubmit={handleSubmit(handleSearch)}
             className="flex items-center gap-2 "
@@ -96,7 +96,7 @@ const Fridge = () => {
               Search
             </Button>
           </form>
-          <form className="flex items-center justify-end">
+          <form className="flex items-center justify-center md:justify-end">
             {!isCategoryLoading ? (
               <CategoryDropdown
                 categories={category}
@@ -108,7 +108,7 @@ const Fridge = () => {
           </form>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-5">
         {isFoodLoding ? (
           <Spinner />
         ) : (

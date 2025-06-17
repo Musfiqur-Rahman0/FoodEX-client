@@ -13,7 +13,7 @@ import {
 export function CategoryDropdown({ categories, handleSelectedCategory }) {
   return (
     <Select onValueChange={handleSelectedCategory}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-fit">
         <SelectValue placeholder="Select a category" />
       </SelectTrigger>
       <SelectContent>
