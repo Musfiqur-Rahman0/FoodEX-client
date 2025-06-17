@@ -6,9 +6,7 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "@/Context/AuthContext";
 import Spinner from "@/components/ui/Spinner";
-import Lottie from "lottie-react";
-import emptyState from "../../assets/emptyState.json";
-import FoodForm from "../Shared/FoodForm";
+
 import useFoodsApi from "@/Hooks/useFoodsApi";
 import MyFoodList from "./MyFoodList";
 

@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
-import signupAnimation from "../../assets/signupAnimation.json";
+import signupAnimation from "../../assets/animation/registerAnimation.json";
 import useAuth from "@/Hooks/useAuth";
 
 const style = {
