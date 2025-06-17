@@ -8,7 +8,7 @@ const FoodOverview = () => {
   return loading ? (
     <Spinner />
   ) : (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-white rounded-2xl shadow-md">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-white rounded-2xl shadow-md">
       {/* Expired Food */}
       <div className="flex flex-col items-center justify-center p-6 border rounded-xl bg-red-50">
         <h2 className="text-lg font-semibold text-red-700">Expired Foods</h2>

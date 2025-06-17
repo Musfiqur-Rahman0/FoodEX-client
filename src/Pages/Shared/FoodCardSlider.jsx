@@ -4,7 +4,7 @@ import FoodCard from "./FoodCard";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useLoaderData } from "react-router";
 
-const FoodCardSlider = ({ items }) => {
+const FoodCardSlider = ({ items, expaired }) => {
   // console.log(items);
 
   return (
@@ -14,7 +14,7 @@ const FoodCardSlider = ({ items }) => {
       modules={[Pagination]}
       slidesPerView={3}
       spaceBetween={50}
-      loop
+      // loop
       className="mt-5 "
     >
       {items?.map((food, index) => (

@@ -1,5 +1,4 @@
 import { AuthContext } from "@/Context/AuthContext";
-import { GlobalContext } from "@/Context/GlobalContext";
 import axios from "axios";
 import React, { use } from "react";
 

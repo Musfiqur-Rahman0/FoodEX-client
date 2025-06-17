@@ -7,7 +7,9 @@ import FoodForm from "../Shared/FoodForm";
 import { useNavigate } from "react-router";
 import useFoodsApi from "@/Hooks/useFoodsApi";
 import { AuthContext } from "@/Context/AuthContext";
-import { HiComputerDesktop } from "react-icons/hi2";
+import emptyState from "../../assets/animation/emptyBox.json";
+import Lottie from "lottie-react";
+import { Button } from "@/components/ui/button";
 
 const MyFoodList = ({ myFoodPromise }) => {
   const initialAdedfood = use(myFoodPromise);
@@ -146,10 +148,15 @@ const MyFoodList = ({ myFoodPromise }) => {
                 </tr>
               ))
             ) : (
-              <Lottie
-                animationData={emptyState}
-                className="h-[300px] md:h-[500px] md:block"
-              />
+              <div className="flex items-center flex-col justify-center">
+                <Lottie
+                  animationData={emptyState}
+                  className="h-[300px] md:h-[500px] md:block"
+                />
+                <Button variant="outline" onClick={() => navigate("/add-food")}>
+                  Add Food
+                </Button>
+              </div>
             )}
           </div>
         </tbody>
