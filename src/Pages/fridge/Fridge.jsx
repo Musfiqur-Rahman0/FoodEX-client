@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { CategoryDropdown } from "../Shared/CategoryDropdown";
 import { Controller, useForm } from "react-hook-form";
 import Spinner from "@/components/ui/Spinner";
+import Lottie from "lottie-react";
+import emptyBox from "../../assets/animation/emptyBox.json";
 
 const Fridge = () => {
   const foods = useLoaderData();
@@ -109,8 +111,15 @@ const Fridge = () => {
         </div>
       </div>
       <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {isFoodLoding ? (
-          <Spinner />
+        {allFoods.length === 0 ? (
+          <div className="flex items-center justify-center w-full h-full md:col-span-2 lg:col-span-3">
+            <Lottie
+              animationData={emptyBox}
+              style={{
+                height: 500,
+              }}
+            />
+          </div>
         ) : (
           allFoods?.map((food) => <FoodCard food={food} key={food._id} />)
         )}
