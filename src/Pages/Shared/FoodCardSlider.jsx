@@ -12,8 +12,19 @@ const FoodCardSlider = ({ items, expaired }) => {
       //   navigation={true}
       pagination={true}
       modules={[Pagination]}
-      slidesPerView={3}
+      slidesPerView={1}
       spaceBetween={50}
+      breakpoints={{
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      }}
       // loop
       className="mt-5 "
     >

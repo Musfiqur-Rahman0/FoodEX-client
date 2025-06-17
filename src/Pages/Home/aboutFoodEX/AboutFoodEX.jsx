@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
+import Lottie from "lottie-react";
 import React from "react";
+import eatingAnimation from "../../../assets/animation/eatingFood.json";
 
 const AboutFoodEX = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
       {/* Left Section – Image or Illustration */}
       <div className="w-full h-full flex justify-center">
-        <img
-          src="https://img.freepik.com/free-vector/expiration-date-concept-illustration_114360-9733.jpg"
-          alt="Food Expiry Illustration"
-          className="w-full max-w-md rounded-xl "
-        />
+        <Lottie animationData={eatingAnimation} height={200} />
       </div>
 
       {/* Right Section – Text Content */}
