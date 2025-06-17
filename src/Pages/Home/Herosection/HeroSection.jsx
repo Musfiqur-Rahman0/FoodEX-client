@@ -29,7 +29,7 @@ const HeroSection = () => {
             <SwiperSlide key={food.id} className="relative">
               <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center h-full w-full">
                 {/* Left content: Text */}
-                <div className="absolute md:static h-full py-5 z-10 bg-white/80 md:bg-transparent md:w-1/2 text-center md:text-left ">
+                <div className="absolute md:static h-full md:h-auto py-5 z-10 bg-white/80 md:bg-transparent md:w-1/2 text-center md:text-left ">
                   <h2 className="text-2xl md:text-4xl font-semibold text-gray-800">
                     {food.title}
                   </h2>
