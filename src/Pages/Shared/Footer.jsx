@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router";
 const Footer = () => {
   return (
     <footer className="bg-white dark:bg-gray-900 z-0">
@@ -19,13 +19,13 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="https://flowbite.com" className="hover:underline">
-                    Flowbite
-                  </a>
+                  <Link to={"/"} className="hover:underline">
+                    FoodEX
+                  </Link>
                 </li>
                 <li>
-                  <a href="https://tailwindcss.com" className="hover:underline">
-                    Tailwind CSS
+                  <a href="" className="hover:underline">
+                    About us
                   </a>
                 </li>
               </ul>
@@ -37,7 +37,8 @@ const Footer = () => {
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a
-                    href="https://github.com/themesberg/flowbite"
+                    href="https://github.com/Musfiqur-Rahman0"
+                    target="_blank"
                     className="hover:underline "
                   >
                     Github
@@ -45,7 +46,8 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://discord.gg/4eeurUVvTy"
+                    href="https://discord.com/channels/@me"
+                    target="_blank"
                     className="hover:underline"
                   >
                     Discord
@@ -75,10 +77,10 @@ const Footer = () => {
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2023{" "}
-            <a href="https://flowbite.com" className="hover:underline">
-              Flowbite™
-            </a>
+            © 2025{" "}
+            <Link to={"/"} className="hover:underline">
+              FoodEX™
+            </Link>
             . All Rights Reserved.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
