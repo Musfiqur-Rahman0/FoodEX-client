@@ -27,9 +27,9 @@ const HeroSection = () => {
         >
           {foodItems.map((food) => (
             <SwiperSlide key={food.id} className="relative">
-              <div className="relative flex flex-col md:flex-row items-center h-full w-full">
+              <div className="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center h-full w-full">
                 {/* Left content: Text */}
-                <div className="absolute md:static z-10 bg-white/80 md:bg-transparent md:w-1/2 text-center md:text-left p-6 md:p-12">
+                <div className="absolute md:static z-10 bg-white/80 md:bg-transparent md:w-1/2 text-center md:text-left ">
                   <h2 className="text-2xl md:text-4xl font-semibold text-gray-800">
                     {food.title}
                   </h2>
@@ -45,12 +45,12 @@ const HeroSection = () => {
                 </div>
 
                 {/* Right content: Image */}
-                <img
-                  src={food.image}
-                  alt={food.title}
-                  className="absolute inset-0 h-full w-full  object-cover "
-                />
               </div>
+              <img
+                src={food.image}
+                alt={food.title}
+                className="absolute inset-0 h-full w-full  object-cover "
+              />
             </SwiperSlide>
           ))}
         </Swiper>
