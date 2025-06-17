@@ -14,7 +14,7 @@ export const foodItems = [
     title: "Healthy Meal",
     subtitle: "Fresh - Organic Bowl Delight",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed eros at nulla blandit porta sed nec nunc.",
+      "A nutrient-rich meal packed with fresh, organic vegetables, quinoa, and grilled chicken. Perfect for a balanced diet and those seeking clean, wholesome nutrition.",
     buttonText: "SEE MORE",
     image: img1,
   },
@@ -23,7 +23,7 @@ export const foodItems = [
     title: "Detox Smoothie",
     subtitle: "Green - Energy Boost Elixir",
     description:
-      "Quisque vitae fermentum sem. Nulla facilisi. Praesent tincidunt, magna non feugiat dapibus, tellus justo blandit orci.",
+      "A refreshing green smoothie made with kale, spinach, green apple, and ginger. Designed to detox your system and provide a natural energy lift throughout the day.",
     buttonText: "SEE MORE",
     image: img2,
   },
@@ -32,7 +32,7 @@ export const foodItems = [
     title: "Artisan Bread",
     subtitle: "Whole - Wheat Rustic Loaf",
     description:
-      "Vestibulum euismod justo vel dignissim lacinia. Integer congue risus in bibendum consequat.",
+      "Handcrafted whole wheat bread made with natural sourdough starter. Baked to golden perfection, offering a hearty texture and rich, earthy flavor ideal for any meal.",
     buttonText: "SEE MORE",
     image: img3,
   },
