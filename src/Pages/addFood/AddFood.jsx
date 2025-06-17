@@ -48,7 +48,7 @@ const AddFood = () => {
 
   return (
     <section>
-      <div className="  max-w-7xl mx-auto flex items-center justify-center h-full ">
+      <div className="  max-w-7xl mx-auto flex items-center justify-center h-full  px-2 sm:px-0">
         <FoodForm
           btnText={"Add Task"}
           handlerFunc={handleAddFood}

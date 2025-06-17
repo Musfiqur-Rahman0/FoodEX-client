@@ -92,12 +92,12 @@ const MyFoodList = ({ myFoodPromise }) => {
     <>
       <table className="w-full">
         <thead className="block">
-          <tr className="w-full grid grid-cols-[200px_1fr_200px_200px_1fr] pb-2 border-b border-gray-300">
-            <td>Food Image</td>
-            <td>Food Title</td>
-            <td>Category</td>
-            <td>Quantity</td>
-            <td className="text-center">Action</td>
+          <tr className="w-full grid grid-cols-9 md:grid-cols-12 pb-2 border-b border-gray-300">
+            <td className="col-span-2">Food Image</td>
+            <td className="col-span-4 text-center md:text-left">Food Title</td>
+            <td className="col-span-2 hidden md:block">Category</td>
+            <td className="hidden md:block"> Quantity</td>
+            <td className="text-center col-span-3">Action</td>
           </tr>
         </thead>
         <tbody className="w-full">
@@ -108,19 +108,23 @@ const MyFoodList = ({ myFoodPromise }) => {
               myAddedFood.map((food, index) => (
                 <tr
                   key={index}
-                  className="w-full grid grid-cols-[200px_1fr_200px_200px_1fr] items-center py-3"
+                  className="w-full grid grid-cols-9  md:grid-cols-12 items-center py-3"
                 >
-                  <td>
+                  <td className="col-span-2">
                     <img
                       src={food?.foodImage || image}
                       alt=""
                       className="h-[80px] w-[120px] rounded-lg"
                     />
                   </td>
-                  <td>{food?.foodName}</td>
-                  <td>{food?.category}</td>
-                  <td>{food?.quantity}</td>
-                  <td className="flex items-center justify-center gap-5">
+                  <td className="col-span-4 text-center md:text-left">
+                    {food?.foodName}
+                  </td>
+                  <td className="col-span-2 hidden md:block">
+                    {food?.category}
+                  </td>
+                  <td className="hidden md:block">{food?.quantity}</td>
+                  <td className="col-span-3 flex items-center justify-center gap-5">
                     <span
                       onClick={() => navigate(`/food/${food?._id}`)}
                       title="See details"

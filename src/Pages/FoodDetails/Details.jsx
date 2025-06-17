@@ -105,7 +105,7 @@ const Details = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 ">
+    <div className="max-w-7xl mx-auto px-2 md:px-4 py-8 ">
       {/* <!-- Food Details Card --> */}
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
         {/* <!-- Image Section --> */}
@@ -114,7 +114,7 @@ const Details = () => {
             id="foodImage"
             src={foodImage}
             alt="Food Image"
-            className="w-full h-[350px] object-cover"
+            className="w-full h-[200px] md:h-[350px] object-cover"
           />
           {isExpaired ? (
             <div
@@ -139,7 +139,10 @@ const Details = () => {
         <div className="p-6">
           {/* <!-- Title and Price --> */}
           <div className="flex justify-between items-center mb-4">
-            <h1 id="foodName" className="text-3xl font-bold text-gray-800">
+            <h1
+              id="foodName"
+              className="text-2xl md:text-3xl font-bold text-gray-800"
+            >
               {foodName || "Margherita Pizza"}
             </h1>
             <span
@@ -205,17 +208,16 @@ const Details = () => {
             </ul>
           </div>
 
-          <div className="mb-6 flex items-center gap-2 text-xl font-bold">
+          <div className="mb-6 flex items-center gap-2 md:text-xl font-bold">
             <CountDown isoDate={expairyDate} />
           </div>
 
-          <div className="mb-6 ">
-            <h2 className="text-xl font-semibold text-slate-800">Note </h2>
-            <p className="text-sm text-slate-600">
-              {foodData?.adminNote ||
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolor nostrum unde, aliquid nihil alias omnis eos ab voluptas quibusdam"}
-            </p>
-          </div>
+          {foodData?.adminNote && (
+            <div className="mb-6 ">
+              <h2 className="text-xl font-semibold text-slate-800">Note </h2>
+              <p className="text-sm text-slate-600">{foodData.adminNote} </p>
+            </div>
+          )}
 
           {/* <!-- User Note Section --> */}
           <form onSubmit={handleSubmit(onSubmit)}>
