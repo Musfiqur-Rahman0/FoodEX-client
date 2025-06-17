@@ -34,7 +34,6 @@ const MyItems = () => {
       });
   }, [user?.email, user?.accessToken]);
 
-  console.log(loading, myAddedFood);
   return loading || !user?.email || !user.accessToken ? (
     <Spinner />
   ) : (

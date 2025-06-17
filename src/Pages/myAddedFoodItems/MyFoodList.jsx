@@ -29,10 +29,8 @@ const MyFoodList = ({ foodData }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes delete it.",
     }).then((result) => {
-      console.log(result);
       if (result.isConfirmed) {
         deleteFoodPromises(id).then((data) => {
-          console.log(data);
           if (data?.deletedCount) {
             const remainings = myAddedFood.filter((food) => food._id !== id);
             setMyAddedFood(remainings);
@@ -81,10 +79,7 @@ const MyFoodList = ({ foodData }) => {
 
   const handleCloseModal = () => {
     setIsUpdating(false);
-    ("closed button clicked");
   };
-
-  useEffect(() => {}, []);
 
   return (
     <>
