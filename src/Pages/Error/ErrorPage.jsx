@@ -16,8 +16,8 @@ const ErrorPage = () => {
       />
       <div className="space-y-2">
         <div>
-          <h2 className="text-5xl font-bold">Error {error.status}</h2>
-          <p className="text-sm">{error.error.message}</p>
+          <h2 className="text-5xl font-bold">Error {error?.status}</h2>
+          <p className="text-sm">{error?.error?.message}</p>
         </div>
         <Button onClick={() => navigate("/")}>Back Home</Button>
       </div>

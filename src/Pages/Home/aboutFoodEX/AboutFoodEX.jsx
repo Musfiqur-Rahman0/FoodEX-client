@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import Lottie from "lottie-react";
 import React from "react";
 import eatingAnimation from "../../../assets/animation/eatingFood.json";
-
+import { motion } from "motion/react";
+import { blurVariant } from "@/lib/utils";
 const AboutFoodEX = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -12,7 +13,14 @@ const AboutFoodEX = () => {
       </div>
 
       {/* Right Section – Text Content */}
-      <div>
+      <motion.div
+        variants={blurVariant}
+        initial="hidden"
+        whileInView="visible"
+        transition={{
+          duration: 0.8,
+        }}
+      >
         <h2 className="text-3xl md:text-4xl font-bold text-[#003049] mb-4">
           About FoodEX
         </h2>
@@ -36,7 +44,7 @@ const AboutFoodEX = () => {
             Learn More
           </Button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

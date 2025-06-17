@@ -2,12 +2,20 @@ import { Button } from "@/components/ui/button";
 import Lottie from "lottie-react";
 import React from "react";
 import greenAni from "../../../assets/animation/green.json";
-
+import { motion } from "motion/react";
+import { blurVariant } from "@/lib/utils";
 const OurAim = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
       {/* Left Section – Text Content */}
-      <div>
+      <motion.div
+        variants={blurVariant}
+        initial="hidden"
+        whileInView="visible"
+        transition={{
+          duration: 0.8,
+        }}
+      >
         <h2 className="text-3xl md:text-4xl font-bold text-[#003049] mb-4">
           Our Aim
         </h2>
@@ -34,7 +42,7 @@ const OurAim = () => {
             Join the Movement
           </Button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Right Section – Image */}
       <div className="w-full h-full flex justify-center">
