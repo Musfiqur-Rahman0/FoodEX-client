@@ -1,6 +1,6 @@
 import Spinner from "@/components/ui/Spinner";
 import { Edit, EyeIcon } from "lucide-react";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import FoodForm from "../Shared/FoodForm";
@@ -11,13 +11,10 @@ import emptyState from "../../assets/animation/emptyBox.json";
 import Lottie from "lottie-react";
 import { Button } from "@/components/ui/button";
 
-const MyFoodList = ({ myFoodPromise }) => {
-  const initialAdedfood = use(myFoodPromise);
-
-  const [isFoodLoading, setIsFoodLoading] = useState(false);
+const MyFoodList = ({ foodData }) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedFood, setSelectedFood] = useState(null);
-  const [myAddedFood, setMyAddedFood] = useState(initialAdedfood);
+  const [myAddedFood, setMyAddedFood] = useState(foodData);
 
   const { updateFoodPromisesWithPut, myFoodPromises } = useFoodsApi();
   const { user } = use(AuthContext);
@@ -88,6 +85,8 @@ const MyFoodList = ({ myFoodPromise }) => {
     console.log("closed button clicked");
   };
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <table className="w-full">
@@ -102,10 +101,8 @@ const MyFoodList = ({ myFoodPromise }) => {
         </thead>
         <tbody className="w-full">
           <div className="space-y-5">
-            {isFoodLoading ? (
-              <Spinner />
-            ) : myAddedFood.length !== 0 ? (
-              myAddedFood.map((food, index) => (
+            {myAddedFood?.length !== 0 ? (
+              myAddedFood?.map((food, index) => (
                 <tr
                   key={index}
                   className="w-full grid grid-cols-9  md:grid-cols-12 items-center py-3"

@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
-      if (user && user.email) {
+      if (user && user?.email) {
         setUser(user);
         setIsLoading(false);
       } else {
@@ -22,6 +22,9 @@ const AuthProvider = ({ children }) => {
     return () => unSubscribe();
   }, [user]);
 
+  console.log(user);
+
+  console.log(user?.accessToken);
   return (
     <AuthContext.Provider
       value={{

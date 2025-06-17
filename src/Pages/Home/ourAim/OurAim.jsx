@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
+import Lottie from "lottie-react";
 import React from "react";
+import greenAni from "../../../assets/animation/green.json";
 
 const OurAim = () => {
   return (
@@ -36,11 +38,7 @@ const OurAim = () => {
 
       {/* Right Section – Image */}
       <div className="w-full h-full flex justify-center">
-        <img
-          src="https://img.freepik.com/free-vector/food-waste-concept-illustration_114360-9453.jpg"
-          alt="Our Aim Illustration"
-          className="w-full max-w-md rounded-xl"
-        />
+        <Lottie animationData={greenAni} />
       </div>
     </div>
   );
