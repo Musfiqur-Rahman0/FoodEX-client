@@ -6,9 +6,8 @@ import React, { use, useState } from "react";
 import { BiX } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { HiBars3 } from "react-icons/hi2";
-
 import { Link, NavLink } from "react-router";
-
+import { motion } from "motion/react";
 import Swal from "sweetalert2";
 
 const authLinks = [
@@ -28,6 +27,7 @@ const guestLinks = [
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [selectedPage, setSelectedPage] = useState("");
   const handleToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -91,8 +91,19 @@ const Header = () => {
           <div className="hidden sm:ml-6 sm:block">
             <div className="flex items-center gap-5">
               {linkToRender.map(({ name, path }) => (
-                <NavLink to={path} key={name}>
+                <NavLink
+                  to={path}
+                  key={name}
+                  onClick={() => setSelectedPage(name)}
+                  className="relative"
+                >
                   {name}
+                  {name === selectedPage && (
+                    <motion.div
+                      className="h-1 w-full rounded-xl bg-primary absolute -bottom-1"
+                      layoutId="underline"
+                    />
+                  )}
                 </NavLink>
               ))}
               {user && user?.email && (
