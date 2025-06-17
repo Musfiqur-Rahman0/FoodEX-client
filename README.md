@@ -38,7 +38,7 @@ A full-stack web application to help users track and manage food items with expi
 
 - **Node.js / Express.js**
 - **MongoDB** – for database
-- **Firebase** – for hosting and/or authentication
+- **Vercel** – for hosting and/or authentication
 
 ---
 
