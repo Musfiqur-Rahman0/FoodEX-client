@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         index: true,
         loader: () =>
           fetch(
-            "http://food-server-orpin-six.vercel.app/foods/recent-expaired"
+            "https://food-server-orpin-six.vercel.app/foods/recent-expaired"
           ),
         Component: Home,
       },
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/fridge",
-        loader: () => fetch("http://food-server-orpin-six.vercel.app/foods"),
+        loader: () => fetch("https://food-server-orpin-six.vercel.app/foods"),
         Component: Fridge,
       },
       {
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
       {
         path: "/food/:id",
         loader: ({ params }) =>
-          fetch(`http://food-server-orpin-six.vercel.app/food/${params.id}`),
+          fetch(`https://food-server-orpin-six.vercel.app/food/${params.id}`),
         element: (
           <Privet>
             <Details />

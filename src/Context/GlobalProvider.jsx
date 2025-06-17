@@ -10,7 +10,7 @@ const GlobalProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await fetch(
-        "http://food-server-orpin-six.vercel.app/foods/recent-expaired"
+        "https://food-server-orpin-six.vercel.app/foods/recent-expaired"
       );
       const data = await res.json();
       setNearlyExFood(data);
@@ -24,7 +24,7 @@ const GlobalProvider = ({ children }) => {
     try {
       setLoading(true);
       const res = await fetch(
-        "http://food-server-orpin-six.vercel.app/expaired-food"
+        "https://food-server-orpin-six.vercel.app/expaired-food"
       );
       const data = await res.json();
       setExpairedFoods(data);

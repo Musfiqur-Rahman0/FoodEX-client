@@ -2,14 +2,9 @@ import Spinner from "@/components/ui/Spinner";
 import { GlobalContext } from "@/Context/GlobalContext";
 import FoodCardSlider from "@/Pages/Shared/FoodCardSlider";
 
-import React, { use, useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
+import React, { use } from "react";
 
 const NearlyExparySection = () => {
-  // (data);
-  // const data = useLoaderData();
-  // (data);
-
   const { loading, nearlyexFood } = use(GlobalContext);
 
   return (

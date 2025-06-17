@@ -6,7 +6,7 @@ import { getReadAbleDate } from "@/lib/utils";
 
 const FoodCard = ({ food }) => {
   const navigate = useNavigate();
-  // (food);
+
   const { quantity, foodName, category, foodImage, expairyDate, _id } = food;
 
   const formattedDate = getReadAbleDate(expairyDate);
@@ -21,9 +21,13 @@ const FoodCard = ({ food }) => {
           alt="burger image"
           className="cursor-pointer w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
-        {isExpaired && (
+        {isExpaired ? (
           <div className="absolute px-5 py-1 text-sm rounded-full right-2 top-2 bg-red-500 text-white z-10">
             Expaired
+          </div>
+        ) : (
+          <div className="absolute px-5 py-1 text-sm rounded-full right-2 top-2 bg-green-600 text-white z-10">
+            Fresh
           </div>
         )}
       </figure>
@@ -33,7 +37,7 @@ const FoodCard = ({ food }) => {
           Category: <span className="font-medium">{category}</span>
         </p>
         <p className="text-sm text-gray-600">
-          quantity: <span className="font-medium">{quantity || 5} pcs</span>
+          Quantity: <span className="font-medium">{quantity || 5} pcs</span>
         </p>
         <p className="text-sm text-gray-600">
           Expiry Date: <span className="font-medium">{formattedDate}</span>

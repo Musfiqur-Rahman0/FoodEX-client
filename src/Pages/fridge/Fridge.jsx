@@ -20,7 +20,7 @@ const Fridge = () => {
     try {
       setIsCategoryLoading(true);
       const res = await fetch(
-        "http://food-server-orpin-six.vercel.app/categories"
+        "https://food-server-orpin-six.vercel.app/categories"
       );
       const data = await res.json();
 
@@ -34,7 +34,7 @@ const Fridge = () => {
   const handleSelectedCategory = async (value) => {
     try {
       const res = await fetch(
-        `http://food-server-orpin-six.vercel.app/filter/${value}`
+        `https://food-server-orpin-six.vercel.app/filter/${value}`
       );
       const data = await res.json();
       setAllFoods(data);
@@ -49,7 +49,7 @@ const Fridge = () => {
     try {
       setIsFoodLoading(true);
       const res = await fetch(
-        `http://food-server-orpin-six.vercel.app/search?query=${query}`
+        `https://food-server-orpin-six.vercel.app/search?query=${query}`
       );
       const searchedFood = await res.json();
       setAllFoods(searchedFood);

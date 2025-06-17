@@ -71,7 +71,7 @@ const Details = () => {
           icon: "success",
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`http://food-server-orpin-six.vercel.app/food/${id}`)
+            fetch(`https://food-server-orpin-six.vercel.app/food/${id}`)
               .then((res) => res.json())
               .then((data) => setFoodData(data));
           }
@@ -95,7 +95,7 @@ const Details = () => {
     //         icon: "success",
     //       }).then((result) => {
     //         if (result.isConfirmed) {
-    //           fetch(`http://food-server-orpin-six.vercel.app/food/${id}`)
+    //           fetch(`https://food-server-orpin-six.vercel.app/food/${id}`)
     //             .then((res) => res.json())
     //             .then((data) => setFoodData(data));
     //         }
