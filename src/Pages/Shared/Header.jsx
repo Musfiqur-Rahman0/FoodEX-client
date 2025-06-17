@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { AuthContext } from "@/Context/AuthContext";
 import useAuth from "@/Hooks/useAuth";
 import { navigation } from "@/lib/utils";
@@ -96,8 +97,6 @@ const Header = () => {
               ))}
               {user && user?.email && (
                 <div
-                  // onMouseEnter={() => setIsHovered(true)} //এইটা কাজ তো করতেছে বুট লগউত এ ক্লিক করা যায় নাহ কারন মাউস সরে গেলে লগউত বাটন হিদে হয়ে যায়
-                  // onMouseLeave={() => setIsHovered(false)}
                   onClick={() => setIsHovered(!isHovered)}
                   className=" cursor-pointer w-10 h-10 overflow-hidden rounded-full"
                 >
@@ -146,6 +145,11 @@ const Header = () => {
                 {name}
               </NavLink>
             ))}
+            {user && (
+              <Button variant={"outline"} onClick={handleLogout}>
+                Logout
+              </Button>
+            )}
           </div>
         </div>
       )}
