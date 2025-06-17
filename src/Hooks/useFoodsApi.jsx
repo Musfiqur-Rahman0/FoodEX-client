@@ -17,6 +17,9 @@ const useFoodsApi = () => {
       .put(`/update-food/${id}`, updatedFood)
       .then((res) => res.data);
   };
+  const deleteFoodPromises = (id) => {
+    return axiosSecuire.delete(`/delete-food/${id}`).then((res) => res.data);
+  };
 
   const updateFoodPromisesWithPatch = (id, updatedFood) => {
     return axiosSecuire
@@ -28,6 +31,7 @@ const useFoodsApi = () => {
     addFoodPromises,
     updateFoodPromisesWithPut,
     updateFoodPromisesWithPatch,
+    deleteFoodPromises,
   };
 };
 

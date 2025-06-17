@@ -22,9 +22,9 @@ const AuthProvider = ({ children }) => {
     return () => unSubscribe();
   }, [user]);
 
-  console.log(user);
+  user;
 
-  console.log(user?.accessToken);
+  user?.accessToken;
   return (
     <AuthContext.Provider
       value={{

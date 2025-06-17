@@ -5,11 +5,11 @@ import useAuth from "./useAuth";
 import Swal from "sweetalert2";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://food-server-orpin-six.vercel.app",
 });
 
 const useAxiosSecuire = () => {
-  const { user } = use(AuthContext); // fix: useContext not use()
+  const { user } = use(AuthContext);
   const { logout } = useAuth();
 
   useEffect(() => {

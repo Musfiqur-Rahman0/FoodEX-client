@@ -9,19 +9,23 @@ const GlobalProvider = ({ children }) => {
   const fetchNearlyExpairyFoodData = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/foods/recent-expaired");
+      const res = await fetch(
+        "http://food-server-orpin-six.vercel.app/foods/recent-expaired"
+      );
       const data = await res.json();
       setNearlyExFood(data);
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      err;
     }
   };
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/expaired-food");
+      const res = await fetch(
+        "http://food-server-orpin-six.vercel.app/expaired-food"
+      );
       const data = await res.json();
       setExpairedFoods(data);
       setLoading(false);
@@ -34,7 +38,7 @@ const GlobalProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  console.log(expairedFoods);
+  expairedFoods;
   return (
     <GlobalContext.Provider value={{ loading, expairedFoods, nearlyexFood }}>
       {children}

@@ -19,7 +19,9 @@ const Fridge = () => {
   const fetchCategory = async () => {
     try {
       setIsCategoryLoading(true);
-      const res = await fetch("http://localhost:3000/categories");
+      const res = await fetch(
+        "http://food-server-orpin-six.vercel.app/categories"
+      );
       const data = await res.json();
 
       setCategory(data);
@@ -31,7 +33,9 @@ const Fridge = () => {
 
   const handleSelectedCategory = async (value) => {
     try {
-      const res = await fetch(`http://localhost:3000/filter/${value}`);
+      const res = await fetch(
+        `http://food-server-orpin-six.vercel.app/filter/${value}`
+      );
       const data = await res.json();
       setAllFoods(data);
     } catch (error) {
@@ -44,7 +48,9 @@ const Fridge = () => {
     const { query } = data;
     try {
       setIsFoodLoading(true);
-      const res = await fetch(`http://localhost:3000/search?query=${query}`);
+      const res = await fetch(
+        `http://food-server-orpin-six.vercel.app/search?query=${query}`
+      );
       const searchedFood = await res.json();
       setAllFoods(searchedFood);
       setIsFoodLoading(false);
@@ -55,13 +61,13 @@ const Fridge = () => {
 
   const { control, handleSubmit } = useForm();
 
-  // console.log(selectedCategory);
+  // (selectedCategory);
 
   useEffect(() => {
     fetchCategory();
   }, []);
-  // console.log(foods);
-  // console.log(searchQuery);
+  // (foods);
+  // (searchQuery);
   return (
     <div className="py-8 px-5 space-y-10 max-w-7xl mx-auto">
       <div>

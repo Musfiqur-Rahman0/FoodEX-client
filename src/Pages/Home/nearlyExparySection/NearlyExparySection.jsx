@@ -6,9 +6,9 @@ import React, { use, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 
 const NearlyExparySection = () => {
-  // console.log(data);
+  // (data);
   // const data = useLoaderData();
-  // console.log(data);
+  // (data);
 
   const { loading, nearlyexFood } = use(GlobalContext);
 

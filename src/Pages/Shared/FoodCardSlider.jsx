@@ -5,7 +5,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useLoaderData } from "react-router";
 
 const FoodCardSlider = ({ items, expaired }) => {
-  // console.log(items);
+  // (items);
 
   return (
     <Swiper

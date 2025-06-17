@@ -12,13 +12,13 @@ const AddFood = () => {
   // const formatedCurrentTime = getReadAbleDate(currentTime);
 
   const handleAddFood = async (data) => {
-    console.log(data);
+    data;
     const newFood = {
       ...data,
       addedOn: currentTime,
     };
 
-    console.log(newFood);
+    newFood;
     try {
       const result = await addFoodPromises(newFood);
       if (result.insertedId) {

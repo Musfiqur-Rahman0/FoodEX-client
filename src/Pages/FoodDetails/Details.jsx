@@ -35,7 +35,7 @@ const Details = () => {
   } = foodData;
 
   const currentTime = new Date();
-  // console.log(expairyDate);
+  // (expairyDate);
 
   const isExpaired = new Date(expairyDate) < currentTime;
 
@@ -49,8 +49,8 @@ const Details = () => {
   // const handleAddNote = (e) => {
   //   e.preventDefault();
   //   const note = e.target.name.value;
-  //   console.log("submited");
-  //   console.log(note);
+  //   ("submited");
+  //   (note);
 
   // };
 
@@ -71,7 +71,7 @@ const Details = () => {
           icon: "success",
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`http://localhost:3000/food/${id}`)
+            fetch(`http://food-server-orpin-six.vercel.app/food/${id}`)
               .then((res) => res.json())
               .then((data) => setFoodData(data));
           }
@@ -95,7 +95,7 @@ const Details = () => {
     //         icon: "success",
     //       }).then((result) => {
     //         if (result.isConfirmed) {
-    //           fetch(`http://localhost:3000/food/${id}`)
+    //           fetch(`http://food-server-orpin-six.vercel.app/food/${id}`)
     //             .then((res) => res.json())
     //             .then((data) => setFoodData(data));
     //         }

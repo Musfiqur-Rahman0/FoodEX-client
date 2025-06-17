@@ -13,7 +13,7 @@ const ExpairedFood = () => {
   // const fetchData = async () => {
   //   try {
   //     setLoading(true);
-  //     const res = await fetch("http://localhost:3000/expaired-food");
+  //     const res = await fetch("http://food-server-orpin-six.vercel.app/expaired-food");
   //     const data = await res.json();
   //     setExpairedFoods(data);
   //     setLoading(false);
@@ -25,7 +25,7 @@ const ExpairedFood = () => {
   //   fetchData();
   // }, []);
 
-  // console.log(expairedFoods, loading);
+  // (expairedFoods, loading);
   return (
     <div className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-semibold ">Expaired Foods</h2>

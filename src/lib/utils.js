@@ -15,7 +15,7 @@ export const foodItems = [
     subtitle: "Fresh - Organic Bowl Delight",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed eros at nulla blandit porta sed nec nunc.",
-    buttonText: "READ MORE",
+    buttonText: "SEE MORE",
     image: img1,
   },
   {
@@ -24,7 +24,7 @@ export const foodItems = [
     subtitle: "Green - Energy Boost Elixir",
     description:
       "Quisque vitae fermentum sem. Nulla facilisi. Praesent tincidunt, magna non feugiat dapibus, tellus justo blandit orci.",
-    buttonText: "READ MORE",
+    buttonText: "SEE MORE",
     image: img2,
   },
   {
@@ -33,7 +33,7 @@ export const foodItems = [
     subtitle: "Whole - Wheat Rustic Loaf",
     description:
       "Vestibulum euismod justo vel dignissim lacinia. Integer congue risus in bibendum consequat.",
-    buttonText: "READ MORE",
+    buttonText: "SEE MORE",
     image: img3,
   },
 ];

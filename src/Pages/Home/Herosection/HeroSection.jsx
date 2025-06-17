@@ -8,8 +8,10 @@ import "swiper/css/navigation";
 
 import { Pagination, Navigation } from "swiper/modules";
 import { foodItems } from "@/lib/utils";
+import { useNavigate } from "react-router";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="hero-section">
       <div className="h-[250px] md:h-[700px] w-full relative">
@@ -39,7 +41,10 @@ const HeroSection = () => {
                   <p className="text-sm md:text-base text-gray-600 mt-4">
                     {food.description}
                   </p>
-                  <button className="mt-6 px-6 py-2 border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300">
+                  <button
+                    onClick={() => navigate("/fridge")}
+                    className="cursor-pointer mt-6 px-6 py-2 border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition duration-300"
+                  >
                     {food.buttonText}
                   </button>
                 </div>

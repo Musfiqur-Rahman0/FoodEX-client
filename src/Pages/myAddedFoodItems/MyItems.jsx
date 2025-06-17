@@ -14,11 +14,10 @@ import MyFoodList from "./MyFoodList";
 
 const MyItems = () => {
   const [myAddedFood, setMyAddedFood] = useState([]);
-  const { user, isloading } = use(AuthContext);
+  const { user } = use(AuthContext);
   const [loading, setLoading] = useState(false);
 
   const { myFoodPromises } = useFoodsApi();
-  console.log(isloading, user.email, user.accessToken);
 
   useEffect(() => {
     if (!user?.email || !user?.accessToken) return;
@@ -35,6 +34,7 @@ const MyItems = () => {
       });
   }, [user?.email, user?.accessToken]);
 
+  console.log(loading, myAddedFood);
   return loading || !user?.email || !user.accessToken ? (
     <Spinner />
   ) : (

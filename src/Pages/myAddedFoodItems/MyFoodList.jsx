@@ -16,7 +16,8 @@ const MyFoodList = ({ foodData }) => {
   const [selectedFood, setSelectedFood] = useState(null);
   const [myAddedFood, setMyAddedFood] = useState(foodData);
 
-  const { updateFoodPromisesWithPut, myFoodPromises } = useFoodsApi();
+  const { updateFoodPromisesWithPut, myFoodPromises, deleteFoodPromises } =
+    useFoodsApi();
   const { user } = use(AuthContext);
   const navigate = useNavigate();
   const handleDelete = (id) => {
@@ -28,21 +29,19 @@ const MyFoodList = ({ foodData }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes delete it.",
     }).then((result) => {
+      console.log(result);
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/delete-food/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data?.deletedCount) {
-              const remainings = myAddedFood.filter((food) => food._id !== id);
-              setMyAddedFood(remainings);
-              Swal.fire({
-                title: "Deleted!",
-                icon: "success",
-              });
-            }
-          });
+        deleteFoodPromises(id).then((data) => {
+          console.log(data);
+          if (data?.deletedCount) {
+            const remainings = myAddedFood.filter((food) => food._id !== id);
+            setMyAddedFood(remainings);
+            Swal.fire({
+              title: "Deleted!",
+              icon: "success",
+            });
+          }
+        });
       }
     });
   };
@@ -71,7 +70,7 @@ const MyFoodList = ({ foodData }) => {
         });
       }
     } catch (error) {
-      console.log(error);
+      error;
       Swal.fire({
         title: "Internal server error",
         icon: "error",
@@ -82,7 +81,7 @@ const MyFoodList = ({ foodData }) => {
 
   const handleCloseModal = () => {
     setIsUpdating(false);
-    console.log("closed button clicked");
+    ("closed button clicked");
   };
 
   useEffect(() => {}, []);

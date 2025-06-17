@@ -6,7 +6,7 @@ import { getReadAbleDate } from "@/lib/utils";
 
 const FoodCard = ({ food }) => {
   const navigate = useNavigate();
-  // console.log(food);
+  // (food);
   const { quantity, foodName, category, foodImage, expairyDate, _id } = food;
 
   const formattedDate = getReadAbleDate(expairyDate);
