@@ -35,7 +35,7 @@ const MyItems = () => {
   return loading || !user?.email || !user.accessToken ? (
     <Spinner />
   ) : (
-    <div className="px-2 lg:px-0 max-w-7xl mx-auto py-8 space-y-10 relative">
+    <div className="pt-20 px-2 lg:px-0 max-w-7xl mx-auto py-8 space-y-10 relative">
       <div>
         <h2 className="text-3xl font-semibold text-slate-800 border-l-6 border-orange-500 pl-2">
           My Food Listings

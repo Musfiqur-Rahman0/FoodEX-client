@@ -11,9 +11,9 @@ const Home = () => {
   return (
     <section id="home" className="space-y-20">
       <HeroSection />
-      <NearlyExparySection />
-      <AboutFoodEX />
       <ExpairedFood />
+      <AboutFoodEX />
+      <NearlyExparySection />
       <OurAim />
       <FoodOverview />
     </section>

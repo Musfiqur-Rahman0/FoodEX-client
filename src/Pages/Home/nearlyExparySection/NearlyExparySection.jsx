@@ -1,5 +1,6 @@
 import Spinner from "@/components/ui/Spinner";
 import { GlobalContext } from "@/Context/GlobalContext";
+import FoodCardSkeleton from "@/Pages/Shared/FoodCardSkeleton";
 import FoodCardSlider from "@/Pages/Shared/FoodCardSlider";
 
 import React, { use } from "react";
@@ -12,7 +13,11 @@ const NearlyExparySection = () => {
       <h2 className="text-3xl font-semibold ">Nearly Expaired Foods </h2>
 
       {loading ? (
-        <Spinner />
+        <div className="grid grid-cols-3 gap-5 mt-5">
+          <FoodCardSkeleton />
+          <FoodCardSkeleton />
+          <FoodCardSkeleton />
+        </div>
       ) : nearlyexFood.length > 0 ? (
         <FoodCardSlider items={nearlyexFood} />
       ) : (

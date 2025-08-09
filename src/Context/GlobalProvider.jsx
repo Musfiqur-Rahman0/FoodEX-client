@@ -40,7 +40,9 @@ const GlobalProvider = ({ children }) => {
 
   console.log(nearlyexFood);
   return (
-    <GlobalContext.Provider value={{ loading, expairedFoods, nearlyexFood }}>
+    <GlobalContext.Provider
+      value={{ loading, expairedFoods, nearlyexFood, setLoading }}
+    >
       {children}
     </GlobalContext.Provider>
   );

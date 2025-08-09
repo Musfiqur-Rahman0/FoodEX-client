@@ -19,6 +19,7 @@ const FoodCard = ({ food }) => {
         <img
           src={foodImage || burger}
           alt="burger image"
+          loading="lazy"
           className="cursor-pointer w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
         {isExpaired ? (
