@@ -23,15 +23,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { use } from "react";
+import { use, useState } from "react";
 import { AuthContext } from "@/Context/AuthContext";
 import { Link, useNavigate } from "react-router";
 import useAuth from "@/Hooks/useAuth";
 import Swal from "sweetalert2";
+import { motion } from "motion/react";
 
 const Navbar = () => {
   const { user, isloading } = use(AuthContext);
   const { logout } = useAuth();
+  const [selectedPage, setSelectedPage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -45,8 +47,7 @@ const Navbar = () => {
   const guestLinks = [
     { name: "Home", path: "/" },
     { name: "Fridge", path: "/fridge" },
-    { name: "Log in", path: "/login" },
-    { name: "Register", path: "/signup" },
+    { name: "Sign in", path: "/login" },
   ];
 
   const linkToRender = !isloading && user ? authLinks : guestLinks;
@@ -91,12 +92,30 @@ const Navbar = () => {
           <NavigationMenu className="hidden lg:block">
             <NavigationMenuList>
               {linkToRender.map((item, index) => (
-                <NavigationMenuItem key={index}>
+                <NavigationMenuItem className={"relative"}>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    <Link to={item.path}> {item.name}</Link>
+                    <Link
+                      to={item.path}
+                      onClick={() => setSelectedPage(item.name)}
+                    >
+                      {item.name}
+                    </Link>
+                    {selectedPage === item.name && (
+                      <motion.div
+                        className="h-1 absolute bottom-0  w-[80%] mx-auto rounded-lg bg-black"
+                        layoutId="underline"
+                        id="underline"
+                      />
+                    )}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
+
+              {user && (
+                <Button variant={"outline"} onClick={handleLogout}>
+                  Logout
+                </Button>
+              )}
             </NavigationMenuList>
           </NavigationMenu>
 
