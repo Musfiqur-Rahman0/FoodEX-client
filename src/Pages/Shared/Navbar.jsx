@@ -75,7 +75,7 @@ const Navbar = () => {
   };
 
   return (
-    <section className="py-4 fixed top-0 w-full bg-white z-50 backdrop:blur-3xl">
+    <section className="py-3 fixed top-0 w-full bg-white z-50 backdrop:blur-3xl">
       <div className="max-w-7xl mx-auto">
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
