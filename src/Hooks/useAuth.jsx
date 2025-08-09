@@ -78,9 +78,10 @@ const useAuth = () => {
   const logout = async () => {
     try {
       await signOut(auth);
-      setUser(null);
+      return { success: true };
     } catch (err) {
       console.error(err);
+      return { success: false };
     }
   };
 

@@ -16,7 +16,7 @@ const GlobalProvider = ({ children }) => {
       setNearlyExFood(data);
       setLoading(false);
     } catch (err) {
-      err;
+      console.log(err);
     }
   };
 
@@ -38,7 +38,7 @@ const GlobalProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  expairedFoods;
+  console.log(nearlyexFood);
   return (
     <GlobalContext.Provider value={{ loading, expairedFoods, nearlyexFood }}>
       {children}

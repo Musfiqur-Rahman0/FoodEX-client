@@ -1,8 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FoodCard from "./FoodCard";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { useLoaderData } from "react-router";
+import { Pagination } from "swiper/modules";
 
 const FoodCardSlider = ({ items, expaired }) => {
   // (items);

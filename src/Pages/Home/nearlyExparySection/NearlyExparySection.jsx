@@ -11,7 +11,13 @@ const NearlyExparySection = () => {
     <div className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-semibold ">Nearly Expaired Foods </h2>
 
-      {loading ? <Spinner /> : <FoodCardSlider items={nearlyexFood} />}
+      {loading ? (
+        <Spinner />
+      ) : nearlyexFood.length > 0 ? (
+        <FoodCardSlider items={nearlyexFood} />
+      ) : (
+        <p>NO Nearly Expaired Food.</p>
+      )}
     </div>
   );
 };

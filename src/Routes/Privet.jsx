@@ -9,11 +9,9 @@ const Privet = ({ children }) => {
   if (isloading) {
     return <Spinner />;
   }
-
   if (!user) {
     return <Navigate to={"/login"} state={pathName} />;
   }
-
   return children;
 };
 
