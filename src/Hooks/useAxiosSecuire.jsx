@@ -5,7 +5,7 @@ import useAuth from "./useAuth";
 import Swal from "sweetalert2";
 
 const axiosInstance = axios.create({
-  baseURL: "https://food-server-orpin-six.vercel.app",
+  baseURL: "http://localhost:3000",
 });
 
 const useAxiosSecuire = () => {

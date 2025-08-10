@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { GlobalContext } from "./GlobalContext";
+import useFoodsApi from "@/Hooks/useFoodsApi";
+import { AuthContext } from "./AuthContext";
+import useAuth from "@/Hooks/useAuth";
 
 const GlobalProvider = ({ children }) => {
   const [expairedFoods, setExpairedFoods] = useState([]);
   const [loading, setLoading] = useState(false);
   const [nearlyexFood, setNearlyExFood] = useState([]);
+  const [myAddedFood, setMyAddedFood] = useState([]);
 
   const fetchNearlyExpairyFoodData = async () => {
     try {
@@ -33,12 +37,12 @@ const GlobalProvider = ({ children }) => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchNearlyExpairyFoodData();
     fetchData();
   }, []);
 
-  console.log(nearlyexFood);
   return (
     <GlobalContext.Provider
       value={{ loading, expairedFoods, nearlyexFood, setLoading }}

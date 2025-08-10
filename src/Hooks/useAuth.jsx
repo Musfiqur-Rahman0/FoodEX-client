@@ -11,10 +11,9 @@ import Swal from "sweetalert2";
 import { useLocation } from "react-router";
 import { auth, googleProvider } from "@/firebase/firebase.init";
 import { AuthContext } from "@/Context/AuthContext";
-import { User } from "lucide-react";
 
 const useAuth = () => {
-  const { setUser, user } = use(AuthContext);
+  const { user } = use(AuthContext);
 
   const location = useLocation();
   const signUp = async (email, password, first_name, photoURL, navigate) => {
@@ -90,6 +89,7 @@ const useAuth = () => {
     signUp,
     loginWithGoogle,
     logout,
+    user,
   };
 };
 

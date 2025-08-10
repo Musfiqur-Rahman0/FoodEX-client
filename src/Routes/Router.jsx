@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/fridge",
-        loader: () => fetch("https://food-server-orpin-six.vercel.app/foods"),
+        loader: () => fetch("http://localhost:3000/foods"),
         Component: Fridge,
       },
       {
