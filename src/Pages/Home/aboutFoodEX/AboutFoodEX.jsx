@@ -39,11 +39,11 @@ const AboutFoodEX = () => {
             data handling.
           </li>
         </ul>
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <Button className="px-6 py-2 bg-[#003049] text-white rounded-md shadow hover:bg-[#00223d] transition">
             Learn More
           </Button>
-        </div>
+        </div> */}
       </motion.div>
     </div>
   );

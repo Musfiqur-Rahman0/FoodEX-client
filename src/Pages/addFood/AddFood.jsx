@@ -4,6 +4,7 @@ import { getReadAbleDate } from "@/lib/utils";
 import Swal from "sweetalert2";
 import { data, useNavigate, useNavigation } from "react-router";
 import useFoodsApi from "@/Hooks/useFoodsApi";
+import axios from "axios";
 
 const AddFood = () => {
   const navigate = useNavigate();
@@ -12,14 +13,26 @@ const AddFood = () => {
   // const formatedCurrentTime = getReadAbleDate(currentTime);
 
   const handleAddFood = async (data) => {
-    data;
-    const newFood = {
-      ...data,
-      addedOn: currentTime,
-    };
+    const file = data.foodImage;
 
-    newFood;
+    const formData = new FormData();
+    formData.append("image", file);
+
     try {
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        formData
+      );
+      const imageURl = res.data.data.display_url;
+      console.log(imageURl);
+
+      data.foodImage = imageURl;
+      const newFood = {
+        ...data,
+        addedOn: currentTime,
+      };
       const result = await addFoodPromises(newFood);
       if (result.insertedId) {
         Swal.fire({

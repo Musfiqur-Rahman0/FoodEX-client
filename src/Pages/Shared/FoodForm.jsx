@@ -169,13 +169,7 @@ const FoodForm = ({
               rules={{ required: "Quantity can't be negative or empty" }}
               render={({ field, fieldState: { error } }) => (
                 <>
-                  <Input
-                    type={"number"}
-                    {...field}
-                    className={
-                      error ? `border border-red-500` : "border border-gray-400"
-                    }
-                  />
+                  <Input type={"number"} {...field} />
                   {error && (
                     <p className="text-red-500 font-semibold">
                       {error.message}
@@ -198,11 +192,13 @@ const FoodForm = ({
             render={({ field, fieldState: { error } }) => (
               <>
                 <Input
-                  type="url"
-                  {...field}
+                  type="file"
                   className={
-                    error ? `border border-red-500` : "border border-gray-400"
+                    error ? "border border-red-500" : "border border-gray-400"
                   }
+                  onChange={(e) => {
+                    field.onChange(e.target.files?.[0]);
+                  }}
                 />
                 {error && (
                   <p className="text-red-500 font-semibold">{error.message}</p>

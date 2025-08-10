@@ -10,6 +10,7 @@ import { AuthContext } from "@/Context/AuthContext";
 import emptyState from "../../assets/animation/emptyBox.json";
 import Lottie from "lottie-react";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
 const MyFoodList = ({ foodData }) => {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -46,11 +47,23 @@ const MyFoodList = ({ foodData }) => {
 
   const handleFoodUpdate = async (updatedFood) => {
     try {
+      const file = updatedFood.foodImage;
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        formData
+      );
+      const imageURl = res.data.data.display_url;
+      updatedFood.foodImage = imageURl;
+
       const result = await updateFoodPromisesWithPut(
         selectedFood._id,
         updatedFood
       );
-
       if (result.modifiedCount) {
         Swal.fire({
           title: "Food Updated successfully",
