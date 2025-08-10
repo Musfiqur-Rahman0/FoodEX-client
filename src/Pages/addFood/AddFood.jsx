@@ -26,7 +26,6 @@ const AddFood = () => {
         formData
       );
       const imageURl = res.data.data.display_url;
-      console.log(imageURl);
 
       data.foodImage = imageURl;
       const newFood = {

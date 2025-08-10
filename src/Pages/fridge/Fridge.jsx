@@ -68,7 +68,7 @@ const Fridge = () => {
       setAllFoods(response.data);
       setTotalPages(response.totalPages);
     }
-  }, [response]);
+  }, [response, currentPage]);
 
   return (
     <div className="pt-20 py-8 px-5 space-y-10 max-w-7xl mx-auto">

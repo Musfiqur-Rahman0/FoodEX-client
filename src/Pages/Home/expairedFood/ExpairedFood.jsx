@@ -7,8 +7,6 @@ import React, { use, useEffect } from "react";
 const ExpairedFood = () => {
   const { loading, expairedFoods, setLoading } = use(GlobalContext);
 
-  console.log(loading);
-
   return (
     <div className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-semibold ">Expaired Foods</h2>

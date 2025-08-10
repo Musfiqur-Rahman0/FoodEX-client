@@ -8,7 +8,6 @@ const GlobalProvider = ({ children }) => {
   const [expairedFoods, setExpairedFoods] = useState([]);
   const [loading, setLoading] = useState(false);
   const [nearlyexFood, setNearlyExFood] = useState([]);
-  const [myAddedFood, setMyAddedFood] = useState([]);
 
   const fetchNearlyExpairyFoodData = async () => {
     try {

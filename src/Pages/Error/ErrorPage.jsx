@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const ErrorPage = () => {
   const error = useRouteError();
   const navigate = useNavigate();
-  console.log(error);
+
   return (
     <div className="h-screen flex flex-col items-center justify-center text-center">
       <Lottie
